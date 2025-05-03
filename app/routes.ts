@@ -6,4 +6,5 @@ export const appRouteNames = {
   favoritesTvSeries: 'favorites-tv-series',
   movie: 'movie',
   tvSeries: 'tv-series',
+  contentDetailed: 'content-detailed'
 };

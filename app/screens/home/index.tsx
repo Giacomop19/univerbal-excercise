@@ -8,7 +8,7 @@ export default function HomeScreen(): ReactNode {
   return (
     <View style={styles.container}>
       <View style={{ marginBottom: 40 }}>
-        <Search />
+        <Search/>
       </View>
 
       <FeaturedMovies style={{ marginBottom: 40 }} />

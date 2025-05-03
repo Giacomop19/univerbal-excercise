@@ -36,7 +36,18 @@ export async function getMovieByIdQuery(
 export async function getFeaturedMoviesQuery(
   signal: AbortSignal,
 ): Promise<Movie[]> {
-  return [];
+  try{
+    const url = new URL('movies/recommended', apiUrl)
+    const req = await fetch(url)
+
+    if(!req.ok) return []
+
+    const json = (await req.json()) as Movie[]
+    return json
+  }catch(error) {
+    console.error(error)
+    return []
+  }
 }
 
 export async function getTopRatedMoviesQuery(): Promise<Movie[]> {
@@ -49,7 +60,8 @@ export async function getTopRatedMoviesQuery(): Promise<Movie[]> {
     const json = (await request.json()) as Movie[];
 
     // top rated has to have a rating above 75%
-    return json.filter((it) => it.rating > 69);
+    console.log(json)
+    return json.filter((it) => it.rating > 75);
   } catch (err) {
     console.error(err);
     return [];

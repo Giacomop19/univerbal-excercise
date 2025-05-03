@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef } from 'react';
+import React, { ReactNode, useRef, useState } from 'react';
 import {
   StyleProp,
   StyleSheet,
@@ -6,6 +6,8 @@ import {
   View,
   ViewStyle,
   Text,
+  Pressable,
+  Modal,
 } from 'react-native';
 import { inputValue$, suggestions$ } from './state';
 import { useAtom, useAtomValue } from 'jotai';
@@ -19,6 +21,7 @@ export function Search({ style }: SearchProps): ReactNode {
   const inputRef = useRef<TextInput>(null);
   const [inputValue, setInputValue] = useAtom(inputValue$);
   const suggestions = useAtomValue(loadable(suggestions$));
+  const [selectedMovie, setSelectedMovie] = useState<any>(null)
 
   return (
     <View style={[searchStyles.container, style]}>
@@ -36,11 +39,32 @@ export function Search({ style }: SearchProps): ReactNode {
             ? null
             : suggestions.data.map((it) => (
                 <View style={searchStyles.suggestionEntry}>
+                  <Pressable
+                    key={it.id}
+                    style={searchStyles.suggestionEntry}
+                    onPress={() => setSelectedMovie(it)}>
                   <Text>{it.title}</Text>
+                  </Pressable>
                 </View>
               ))}
         </View>
       )}
+      <Modal
+        visible={!!selectedMovie}
+        transparent
+        animationType='fade'
+        onRequestClose={() => setSelectedMovie(null)}
+        >
+          <View style={modalStyles.overlay}>
+          <View style={modalStyles.modal}>
+            <Text style={modalStyles.title}>{selectedMovie?.title}</Text>
+            <Text>Rating: {selectedMovie?.rating}</Text>
+            <Pressable onPress={() => setSelectedMovie(null)} style={modalStyles.closeButton}>
+              <Text style={{ color: 'white' }}>Close</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -81,5 +105,38 @@ const searchStyles = StyleSheet.create({
   suggestionEntry: {
     paddingVertical: 10,
     paddingHorizontal: 12,
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 8
+  }
+});
+
+const modalStyles = StyleSheet.create({
+  overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modal: {
+    backgroundColor: '#fff',
+    padding: 24,
+    borderRadius: 10,
+    width: '80%',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 12,
+  },
+  closeButton: {
+    marginTop: 16,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#007AFF',
+    borderRadius: 6,
   },
 });
