@@ -6,6 +6,7 @@ import TopRatedScreen from '@/screens/top-rated';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { appRouteNames } from '@/routes';
 import { z } from 'zod';
+import { IconSymbol } from '@/ui/button/IconSymbol';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,22 +25,29 @@ export default function App() {
   return (
     <NavigationContainer>
       <StatusBar style="auto" animated />
-
       <Tab.Navigator initialRouteName={appRouteNames.root}>
         <Tab.Screen
-          name="tab-home"
+          name="Home"
           component={HomeScreen}
-          options={{ tabBarLabel: () => null }}
+          options={{ 
+            tabBarLabel: 'Home',
+            tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />
+          }}
         />
         <Tab.Screen
-          name="tab-top-rated"
+          name="Top rated"
           component={TopRatedScreen}
-          options={{ tabBarLabel: () => null }}
+          options={{ 
+            tabBarLabel: "Top rated",
+            tabBarIcon: ({ color }) => <IconSymbol size={28} name='rated.fill' color={color} />}}
         />
         <Tab.Screen
-          name="tab-favorites"
+          name="Favorites"
           component={FavoritesScreen}
-          options={{ tabBarLabel: () => null }}
+          options={{ 
+            tabBarLabel: "Favorites",
+            tabBarIcon: ({ color }) => <IconSymbol size={28} name="star.fill" color={color} />
+           }}
         />
       </Tab.Navigator>
     </NavigationContainer>

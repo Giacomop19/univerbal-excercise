@@ -2,7 +2,7 @@ import { List } from '@/ui/list';
 import { useAtom } from 'jotai';
 import { loadable } from 'jotai/utils';
 import { useEffect, useState, type ReactNode } from 'react';
-import { Text, StyleSheet, ScrollView } from 'react-native';
+import { Text, StyleSheet, ScrollView, SafeAreaView, View } from 'react-native';
 import { topRatedMovies$ } from './state';
 import { TVSeries } from 'domain/tv-series';
 import { getTopRatedTvSeriesQuery } from '@/infrastructure/repositories/tv-series';
@@ -32,26 +32,44 @@ export default function TopRatedScreen(): ReactNode {
 
   if (topRatedMoviesLoadable.state === 'hasData') {
     return (
-      <ScrollView style={styles.root}>
-        {/* movies */}
-        <Text style={styles.title}>Top rated movies</Text>
-        <List data={topRatedMoviesLoadable.data} style={{ marginBottom: 40 }} />
+      //FlatList was causing an error when inside a ScrollView, tipically happens when nested
+      <> 
+      <SafeAreaView style={styles.container}>
+          {/* movies */}
+          <ScrollView  style={styles.contentContainer}>
+            <View style={styles.section}>
+              <Text style={styles.title}>Top rated movies</Text>
+              <List data={topRatedMoviesLoadable.data}  />
+            </View>
 
-        {/* tv series */}
-        <Text style={styles.title}>Top rated tv series</Text>
-        <List data={tvSeres} />
-      </ScrollView>
+          {/* tv series */}
+          <View style={styles.section}>
+            <Text style={styles.title}>Top rated tv series</Text>
+            <List data={tvSeres} />
+          </View>
+          </ScrollView>
+      </SafeAreaView>
+      </>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-
   title: {
-    marginBottom: 24,
+    marginBottom: 20,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#222'
   },
+  container: {
+    flex: 1,
+    backgroundColor: '#d3d3d3',
+    alignItems : 'center',
+  },
+  contentContainer: {
+    padding : 15
+  },
+  section:{
+    marginBottom: 30
+  }
 });

@@ -21,10 +21,10 @@ export function Search({ style }: SearchProps): ReactNode {
   const suggestions = useAtomValue(loadable(suggestions$));
 
   return (
-    <View style={[searchStyles.root, style]}>
+    <View style={[searchStyles.container, style]}>
       <TextInput
         ref={inputRef}
-        style={{ height: 40, borderColor: 'red', borderWidth: 2 }}
+        style={[searchStyles.input]}
         placeholder="type to search..."
         onChangeText={setInputValue}
         value={inputValue}
@@ -46,19 +46,40 @@ export function Search({ style }: SearchProps): ReactNode {
 }
 
 const searchStyles = StyleSheet.create({
-  root: {},
-
-  input: {},
-
-  suggestions: {
-    width: '100%',
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-    backgroundColor: 'white',
-    borderWidth: 2,
-    borderColor: 'yellow',
+  container: {
+    flexDirection: 'row',
+    backgroundColor: '#f0f0f0',
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    alignItems: 'center',
+    margin: 16,
+    height: 40,
   },
-
-  suggestionEntry: {},
+  icon: {
+    marginRight: 8,
+  },
+  input: {
+    flex: 1,
+    fontSize: 16,
+    color: '#333',
+  },
+  suggestions: {
+    left: 0,
+    right: 0,
+    top: 45,
+    position: 'absolute',
+    backgroundColor: '#fff',
+    borderColor: '#fff',
+    borderRadius: 8,
+    paddingVertical : 4,
+    shadowColor : '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  suggestionEntry: {
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+  },
 });
