@@ -1,3 +1,5 @@
+import TvSeriesDetailedScreen from "./screens/content-detailed";
+
 export const appRouteNames = {
   root: 'tab-home',
   topRated: 'tab-top-rated',
@@ -6,5 +8,5 @@ export const appRouteNames = {
   favoritesTvSeries: 'favorites-tv-series',
   movie: 'movie',
   tvSeries: 'tv-series',
-  contentDetailed: 'content-detailed'
+  tvSeriesDetailedScreen : 'tv-series-detailed'
 };

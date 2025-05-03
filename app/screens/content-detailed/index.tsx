@@ -1,13 +1,20 @@
-import React, { ReactNode } from 'react'
+import { RouteProp, useRoute } from '@react-navigation/native';
+import React from 'react'
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function ContentDetailed({route}) {
-    const {movie} = route.params
+type TvSeriesScreenProps = {
+  route: any;
+};
+
+export default function TvSeriesDetailedScreen(props: TvSeriesScreenProps) {
+
+  const { title, rating, season} = props.route
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{movie.title}</Text>
-            <Text>Rating: {movie.rating}</Text>
+            <Text style={styles.title}>{title}</Text>
+            <Text>Rating: {rating}</Text>
+            <Text>Season: {season}</Text>
         </View>
     )
 

@@ -31,7 +31,7 @@ app.get('/tv-series/:movieId/poster', (req, res) => {
 });
 
 app.get('/movies/recommended', async (req, res) => {
-  const timeoutMs = Math.max(1, Math.random() * 3) * 1000;
+  const timeoutMs = Math.max(2, Math.random() * 5) * 1000;
   await sleep(timeoutMs);
 
   res.json(moviesData.movies.slice(0, 5));
@@ -50,10 +50,6 @@ app.get('/tv-series/recommended', async (req, res) => {
 
 app.get('/tv-series/:seriesId', (req, res) => {
   res.json(tvSeriesData.tvSeries.find((it) => it.id === req.params.seriesId));
-});
-
-app.get('/tv-series/:seriesId/poster', (req, res) => {
-  res.json({ url: req.url + '/img/poster.jpg' });
 });
 
 app.get('/tv-series/:seriesId/poster', (req, res) => {
