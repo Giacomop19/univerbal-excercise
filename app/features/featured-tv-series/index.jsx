@@ -2,14 +2,9 @@ import { Poster } from '@/ui/poster';
 import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { featuredTvSeries$ } from './state';
 import { useAtom } from 'jotai';
-import { useEffect } from 'react';
 import { Rating } from '@/ui/rating';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import TvSeriesDetailedScreen from '@/screens/content-detailed';
 import { useNavigation } from '@react-navigation/native';
 
-const Stack = createNativeStackNavigator()
-const initialRouteName = 'featured-tv-series';
 
 export function FeaturedTvSeries() {
   const [featuredTvSeries] = useAtom(featuredTvSeries$);

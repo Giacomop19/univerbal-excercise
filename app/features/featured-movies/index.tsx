@@ -16,7 +16,6 @@ export function FeaturedMovies({ style }: Props): JSX.Element | null {
     case 'loading': {
       return null;
     }
-
     case 'hasData': {
       return (
         <View style={[styles.root, style]}>
@@ -28,6 +27,9 @@ export function FeaturedMovies({ style }: Props): JSX.Element | null {
                 isFavorite
                 title={it.title}
                 onFavoritePress={undefined as any}
+                src={
+                  'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/2560px-Image_created_with_a_mobile_phone.png'
+                }
               />
             ))}
           </ScrollView>

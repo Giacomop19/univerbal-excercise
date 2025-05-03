@@ -22,19 +22,19 @@ app.get('/movies', (req, res) => {
   res.json(moviesData.movies);
 });
 
+app.get('/movies/featured', async (req, res) => {
+  const timeoutMs = Math.max(2, Math.random() * 5) * 1000;
+  await sleep(timeoutMs);
+
+  res.json(moviesData.movies.slice(0,5))
+})
+
 app.get('/movies/:movieId', (req, res) => {
   res.json(moviesData.movies.find((it) => it.id === req.params.movieId));
 });
 
 app.get('/tv-series/:movieId/poster', (req, res) => {
   res.json({ url: req.url + '/img/poster.jpg' });
-});
-
-app.get('/movies/recommended', async (req, res) => {
-  const timeoutMs = Math.max(2, Math.random() * 5) * 1000;
-  await sleep(timeoutMs);
-
-  res.json(moviesData.movies.slice(0, 5));
 });
 
 app.get('/tv-series', (req, res) => {

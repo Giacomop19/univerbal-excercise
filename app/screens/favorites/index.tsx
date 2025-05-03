@@ -11,8 +11,8 @@ const initialRouteName = 'favorites-root';
 export default function FavoritesScreen(): ReactNode {
   return (
     <FavoritesStack.Navigator initialRouteName={initialRouteName}>
-      <FavoritesStack.Screen name={initialRouteName} component={Screen} />
-      <FavoritesStack.Screen name="favorites-movies" component={MovieScreen} />
+      <FavoritesStack.Screen name={initialRouteName} component={Screen} options={{ headerShown: false }}/>
+      <FavoritesStack.Screen name="favorites-movies" component={MovieScreen} options={{ headerShown: false }} />
       <FavoritesStack.Screen
         name="favorites-tv-series"
         component={TvSeriesScreen}

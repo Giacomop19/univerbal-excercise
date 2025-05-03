@@ -6,7 +6,7 @@ type TvSeriesScreenProps = {
   route: any;
 };
 
-export default function TvSeriesDetailedScreen(props: TvSeriesScreenProps) {
+export default function DetailedScreen(props: TvSeriesScreenProps) {
 
   const { title, rating, season} = props.route
 
