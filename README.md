@@ -32,7 +32,7 @@ Don't forget to give us access to the repository by either making it public or i
 
 - [✅] Running `npm start` does not start the app due to errors in the console
 - [✅] Bottom tab navigation does not display icons
-- [ ] The app is not styled - make it pretty
+- [✅] The app is not styled - make it pretty
 - [ ] The console should not display any warning nor errors in general
 
 ## Home screen (tab-home)
@@ -47,12 +47,12 @@ Don't forget to give us access to the repository by either making it public or i
 ### Featured Movies
 
 - [✅] The component does not fetch data
-- [ ] Pressing on movie should open the screen with movie details
+- [✅] Pressing on movie should open the screen with movie details
 
 ### Featured Tv Series
 
 - [✅] Enable the component. It's disabled as it can crash the home screen
-- [ ] Pressing on TV series should open the screen with TV series details
+- [✅] Pressing on TV series should open the screen with TV series details
 - [✅] The rating is not displayed correctly
 
 ## Movie and Tv Series screens (movie, tv-series)
@@ -62,8 +62,8 @@ Don't forget to give us access to the repository by either making it public or i
 
 ## Top rated screen (tab-top-rated)
 
-- [ ] The list should display items with ratings of >=75
-- [ ] Some list entries display incorrectly formatted values
+- [✅] The list should display items with ratings of >=75
+- [✅] Some list entries display incorrectly formatted values
 
 ## Favorites screen (tab-favorites)
 
