@@ -13,6 +13,7 @@ const sleep = async (ms: number) =>
   });
 
 const app = express();
+app.use(express.static('img'))
 
 app.use(corsConfig);
 
@@ -27,6 +28,11 @@ app.get('/movies/featured', async (req, res) => {
   await sleep(timeoutMs);
 
   res.json(moviesData.movies.slice(0,5))
+})
+
+app.get('/poster/:file', (req, res) => {
+  const file = req.params.file
+  res.sendFile(`./img/poster.jpg`, {root: __dirname})
 })
 
 app.get('/movies/:movieId', (req, res) => {

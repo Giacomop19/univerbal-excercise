@@ -65,3 +65,20 @@ export async function getTopRatedMoviesQuery(): Promise<Movie[]> {
     return [];
   }
 }
+
+export async function getMoviePoster(
+  signal: AbortSignal,
+): Promise<any> {
+  try {
+    const poster = 'poster.jpg'
+    const file = new URL(`/poster/${poster}`, apiUrl);
+  
+    const request = await fetch(file);
+    if (!request.ok) return;
+  
+    return (await request);
+  } catch(err){
+    console.error(err)
+    return []
+  }
+}

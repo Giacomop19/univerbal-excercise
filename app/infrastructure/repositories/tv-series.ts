@@ -31,7 +31,6 @@ export async function getTvSeriesByIdQuery(
 
 export async function getFeaturedTvSeriesQuery() {
   const url = new URL('/tv-series/recommended', apiUrl);
-  console.log(url);
 
   const request = await fetch(url);
   if (!request.ok) return [];

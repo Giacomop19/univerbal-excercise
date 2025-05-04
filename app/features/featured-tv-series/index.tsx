@@ -1,6 +1,6 @@
 import { Poster } from '@/ui/poster';
 import { ScrollView, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
-import { file$, movies$ } from './state';
+import { file$, featuredTvSeries$ } from './state';
 import { useAtomValue } from 'jotai';
 import { loadable } from 'jotai/utils';
 import { Rating } from '@/ui/rating';
@@ -11,8 +11,8 @@ type Props = {
   style?: any;
 };
 
-export function FeaturedMovies({ style }: Props): JSX.Element | null {
-  const stateLoadable = useAtomValue(loadable(movies$));
+export function FeaturedTvSeries({ style }: Props): JSX.Element | null {
+  const stateLoadable = useAtomValue(loadable(featuredTvSeries$));
 
   const posterFile = useAtomValue(loadable(file$))
   let blob : string = ''
@@ -45,7 +45,7 @@ export function FeaturedMovies({ style }: Props): JSX.Element | null {
     case 'hasData': {
       return (
         <View style={[styles.root, style]}>
-          <Text style={styles.title}>Featured Movies</Text>
+          <Text style={styles.title}>Featured Tv Series</Text>
           <ScrollView horizontal style={styles.list}>
             {stateLoadable.data.map((it, index) => (
               <View key={it.id ?? index} style={styles.card}>

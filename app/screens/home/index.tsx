@@ -4,7 +4,8 @@ import { Search } from '@/features/search';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Suspense, type ReactNode } from 'react';
 import { View, StyleSheet} from 'react-native';
-import DetailedScreen from '../content-detailed';
+import MovieScreen from '../movie';
+import TvSeriesScreen from '../tv-series';
 
 const HomeStack = createNativeStackNavigator()
 
@@ -14,7 +15,8 @@ export default function HomeScreen(): ReactNode {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen name={initialRoute} component={Screen} options={{ headerShown: false }}/>
-      <HomeStack.Screen name={'Content detailed'} component={DetailedScreen} options={{ headerShown: false }}/>
+      <HomeStack.Screen name={'Movie detailed'} component={MovieScreen} options={{ headerShown: false }}/>
+      <HomeStack.Screen name={'Tv Serie detailed'} component={TvSeriesScreen} options={{ headerShown: false }}/>
     </HomeStack.Navigator>
     
   );
@@ -26,8 +28,8 @@ function Screen() : ReactNode {
       <View style={{ marginBottom: 40 }}>
         <Search/>
       </View>
-      <FeaturedMovies style={{ marginBottom: 40 }} />
-      {/* <FeaturedTvSeries />  */}
+      <FeaturedMovies />
+      <FeaturedTvSeries /> 
     </View>
   )
 }
