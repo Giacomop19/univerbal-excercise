@@ -6,8 +6,6 @@ import {
   ViewStyle,
   Text,
   StyleSheet,
-  SafeAreaView,
-  ScrollView,
 } from 'react-native';
 
 import { Rating } from '../rating';
@@ -23,6 +21,7 @@ export function List({ style, data }: ListProps): ReactNode {
         style={style}
         data={data}
         keyExtractor={(it) => it.id}
+        scrollEnabled={false}
         renderItem={(it) => {
           return (
             <ListEntry
