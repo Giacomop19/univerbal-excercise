@@ -1,11 +1,12 @@
 import { Poster } from '@/ui/poster';
-import { ScrollView, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, ActivityIndicator, Pressable } from 'react-native';
 import { file$, featuredTvSeries$ } from './state';
 import { useAtomValue } from 'jotai';
 import { loadable } from 'jotai/utils';
 import { Rating } from '@/ui/rating';
 import { fileReader } from '@/utils';
 import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 type Props = {
   style?: any;
@@ -13,6 +14,7 @@ type Props = {
 
 export function FeaturedTvSeries({ style }: Props): JSX.Element | null {
   const stateLoadable = useAtomValue(loadable(featuredTvSeries$));
+  const navigation = useNavigation()
 
   const posterFile = useAtomValue(loadable(file$))
   let blob : string = ''
@@ -48,7 +50,11 @@ export function FeaturedTvSeries({ style }: Props): JSX.Element | null {
           <Text style={styles.title}>Featured Tv Series</Text>
           <ScrollView horizontal style={styles.list}>
             {stateLoadable.data.map((it, index) => (
-              <View key={it.id ?? index} style={styles.card}>
+              <Pressable 
+                key={it.id ?? index}
+                onPress={() => navigation.navigate('tv-series-screen', {tvSeries : it, poster: blob})}
+              >
+              <View  style={styles.card}>
                 <View style={styles.overlay}>
                   <Text style={styles.text}>{it.title}</Text>
                   <Rating style={styles.text} value={it.rating} />
@@ -62,6 +68,7 @@ export function FeaturedTvSeries({ style }: Props): JSX.Element | null {
                   src={blob}
                 />
               </View>
+              </Pressable>
             ))}
           </ScrollView>
         </View>

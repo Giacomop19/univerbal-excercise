@@ -46,19 +46,19 @@ Don't forget to give us access to the repository by either making it public or i
 
 ### Featured Movies
 
-- [ ] The component does not fetch data
+- [✅] The component does not fetch data
 - [ ] Pressing on movie should open the screen with movie details
 
 ### Featured Tv Series
 
-- [ ] Enable the component. It's disabled as it can crash the home screen
+- [✅] Enable the component. It's disabled as it can crash the home screen
 - [ ] Pressing on TV series should open the screen with TV series details
-- [ ] The rating is not displayed correctly
+- [✅] The rating is not displayed correctly
 
 ## Movie and Tv Series screens (movie, tv-series)
 
-- [ ] They display nothing and should display all data about the item
-- [ ] Navigating back should redirect to the correct screen
+- [✅] They display nothing and should display all data about the item
+- [✅] Navigating back should redirect to the correct screen
 
 ## Top rated screen (tab-top-rated)
 

@@ -15,8 +15,8 @@ export default function HomeScreen(): ReactNode {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen name={initialRoute} component={Screen} options={{ headerShown: false }}/>
-      <HomeStack.Screen name={'Movie detailed'} component={MovieScreen} options={{ headerShown: false }}/>
-      <HomeStack.Screen name={'Tv Serie detailed'} component={TvSeriesScreen} options={{ headerShown: false }}/>
+      <HomeStack.Screen name={'movie-screen'} component={MovieScreen} options={{ headerShown: false }}/>
+      <HomeStack.Screen name="tv-series-screen" component={TvSeriesScreen} options={{ headerShown: false }}/>
     </HomeStack.Navigator>
     
   );
