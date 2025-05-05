@@ -26,7 +26,7 @@ function Screen() : ReactNode {
   return (
     <View style={styles.container}>
       <View style={{ marginBottom: 40 }}>
-        <Search/>
+        <Search />
       </View>
       <FeaturedMovies />
       <FeaturedTvSeries /> 

@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
   },
   root: {
     padding: 10,
+    zIndex: -1
   },
   poster: {
     flex: 1,

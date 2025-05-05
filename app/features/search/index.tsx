@@ -9,7 +9,7 @@ import {
   Pressable,
   Modal,
 } from 'react-native';
-import { inputValue$, suggestions$ } from './state';
+import { inputValue$, inputYearValue$, suggestions$ } from './state';
 import { useAtom, useAtomValue } from 'jotai';
 import { loadable } from 'jotai/utils';
 
@@ -20,7 +20,18 @@ export type SearchProps = {
 export function Search({ style }: SearchProps): ReactNode {
   const inputRef = useRef<TextInput>(null);
   const [inputValue, setInputValue] = useAtom(inputValue$);
+  const [inputYearValue, setYearInputValue] = useAtom(inputYearValue$)
   const suggestions = useAtomValue(loadable(suggestions$));
+  if(suggestions.state === 'hasData'){
+    const filteredSuggestions = suggestions.data.filter((it) => {
+      //implementing filter by year release
+    })
+      
+  }
+  
+
+  
+
   const [selectedMovie, setSelectedMovie] = useState<any>(null)
 
   return (
@@ -78,6 +89,7 @@ const searchStyles = StyleSheet.create({
     alignItems: 'center',
     margin: 16,
     height: 40,
+    position:'relative'
   },
   icon: {
     marginRight: 8,
@@ -101,6 +113,7 @@ const searchStyles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 5,
+    zIndex: 1000
   },
   suggestionEntry: {
     paddingVertical: 10,
