@@ -5,7 +5,7 @@ type MovieScreenProps = {
 };
 
 export default function MovieScreen(props: MovieScreenProps) {
-  const { title, rating, description, genres, seasons, director, releaseYear } = props.route.params.movie;
+  const { title, rating, description, genres, seasons, director, releaseYear } = props.route.params.data;
     const posterUrl = props.route.params.poster
     console.log(props.route)
   

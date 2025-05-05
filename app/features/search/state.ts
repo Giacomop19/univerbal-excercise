@@ -3,13 +3,11 @@ import { findMoviesMatchingQuery } from '@/infrastructure/repositories/movie';
 import { findTvSeriesMatchingQuery } from '@/infrastructure/repositories/tv-series';
 
 export const inputValue$ = atom<string | undefined>();
-export const inputContentType$ = atom<boolean | undefined>()
 
 type Suggestion = { title: string; id: string, seasons ?:any };
 
 export const suggestions$ = atom(async (get, { signal }) => {
   const title = get(inputValue$);
-  const contentType = get(inputContentType$)
   if (!title) return [];
   
 

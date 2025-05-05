@@ -9,9 +9,10 @@ import {
   Pressable,
   Modal,
 } from 'react-native';
-import { inputValue$, inputContentType$, suggestions$ } from './state';
+import { inputValue$, suggestions$ } from './state';
 import { useAtom, useAtomValue } from 'jotai';
 import { loadable } from 'jotai/utils';
+import { useNavigation } from '@react-navigation/native';
 
 export type SearchProps = {
   style?: StyleProp<ViewStyle>;
@@ -22,6 +23,7 @@ export function Search({ style }: SearchProps): ReactNode {
   const [inputValue, setInputValue] = useAtom(inputValue$);
   const [selectedType, setSelectedType] = useState<'movie' | 'tv' | null>(null);
   const suggestions = useAtomValue(loadable(suggestions$));
+  const navigation = useNavigation()
   const filteredSuggestions = suggestions.state === 'hasData'
     ? suggestions.data.filter((it) => {
       const query = inputValue?.toLowerCase();
@@ -37,9 +39,7 @@ export function Search({ style }: SearchProps): ReactNode {
       return titleMatches;
     })
     : []
-  
 
-  const [selectedMovie, setSelectedMovie] = useState<any>(null)
 
   return (
     <View style={[searchStyles.container, style]}>
@@ -80,29 +80,18 @@ export function Search({ style }: SearchProps): ReactNode {
                   <Pressable
                     key={it.id}
                     style={searchStyles.suggestionEntry}
-                    onPress={() => setSelectedMovie(it)}>
+                    onPress={() => {
+                      const isTvSeries = it.seasons !== undefined;
+                      const screenName = isTvSeries ? 'tv-series-screen' : 'movie-screen';
+                      
+                      navigation.navigate(screenName, {data: it})
+                    }}>
                   <Text>{it.title}</Text>
                   </Pressable>
                 </View>
               ))}
         </View>
       )}
-      <Modal
-        visible={!!selectedMovie}
-        transparent
-        animationType='fade'
-        onRequestClose={() => setSelectedMovie(null)}
-        >
-          <View style={modalStyles.overlay}>
-          <View style={modalStyles.modal}>
-            <Text style={modalStyles.title}>{selectedMovie?.title}</Text>
-            <Text>Rating: {selectedMovie?.rating}</Text>
-            <Pressable onPress={() => setSelectedMovie(null)} style={modalStyles.closeButton}>
-              <Text style={{ color: 'white' }}>Close</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
     </View>
   );
 }

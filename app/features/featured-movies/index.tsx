@@ -52,7 +52,7 @@ export function FeaturedMovies({ style }: Props): JSX.Element | null {
             {stateLoadable.data.map((it, index) => (
               <Pressable 
                 key={it.id ?? index}
-                onPress={() => navigation.navigate('movie-screen', {movie : it, poster: blob})}
+                onPress={() => navigation.navigate('movie-screen', {data : it, poster: blob})}
               >
               <View style={styles.card}>
                 <View style={styles.overlay}>
