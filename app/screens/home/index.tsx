@@ -25,7 +25,7 @@ export default function HomeScreen(): ReactNode {
 function Screen() : ReactNode {
   return (
     <View style={styles.container}>
-      <View style={{ marginBottom: 40 }}>
+      <View style={{}}>
         <Search />
       </View>
       <FeaturedMovies />
