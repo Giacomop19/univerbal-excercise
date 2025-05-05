@@ -12,7 +12,6 @@ export const suggestions$ = atom(async (get, { signal }) => {
   
 
   const movies = await findMoviesMatchingQuery(signal, { title});
-  console.log(movies)
   const tvSeries = await findTvSeriesMatchingQuery({ title });
 
   const result: Suggestion[] = [];

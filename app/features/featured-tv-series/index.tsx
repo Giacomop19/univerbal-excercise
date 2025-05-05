@@ -1,12 +1,13 @@
 import { Poster } from '@/ui/poster';
 import { ScrollView, StyleSheet, Text, View, ActivityIndicator, Pressable } from 'react-native';
 import { file$, featuredTvSeries$ } from './state';
-import { useAtomValue } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { loadable } from 'jotai/utils';
 import { Rating } from '@/ui/rating';
 import { fileReader } from '@/utils';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { favoritesTvSerie$ } from 'domain/utils';
 
 type Props = {
   style?: any;
@@ -20,19 +21,16 @@ export function FeaturedTvSeries({ style }: Props): JSX.Element | null {
   let blob : string = ''
   if(posterFile.state == 'hasData') blob = posterFile.data.url
   
-  const [favorites, setFavorites] = useState<Set<string>>();
-
-  function toggleFavorite(id: string) {
-    setFavorites((prev) =>{
-      const updated = new Set(prev)
-      if(updated.has(id)) {
-        updated.delete(id)
-      }else{
-        updated.add(id)
-      }
-      return updated
-    });
-  }
+  const [favorites, setFavorites] = useAtom(favoritesTvSerie$);
+  
+  const toggleFavorite = async (tvSerie: any) => {
+    const isFav = favorites?.some((item) => item.id === tvSerie.id)
+    if (isFav) {
+      await setFavorites((prev) => prev.filter((item) => item.id !== tvSerie.id));
+    } else {
+      await setFavorites((prev) => [...prev, tvSerie]);
+    }
+  };
 
   switch (stateLoadable.state) {
     case 'hasError':
@@ -62,9 +60,9 @@ export function FeaturedTvSeries({ style }: Props): JSX.Element | null {
                 <Poster
                   key={index}
                   style={styles.poster}
-                  isFavorite={favorites?.has(it.id)}
+                  isFavorite={favorites?.some((item) => item.id === it.id)}
                   title={it.title}
-                  onFavoritePress={() => toggleFavorite(it.id)}
+                  onFavoritePress={() => toggleFavorite(it)}
                   src={blob}
                 />
               </View>

@@ -7,7 +7,6 @@ type TvSeriesScreenProps = {
 export default function TvSeriesScreen(props: TvSeriesScreenProps) {
   const { title, rating, description, genres, seasons, creator, releaseYear } = props.route.params.data;
   const posterUrl = props.route.params.poster
-  console.log(props.route)
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
