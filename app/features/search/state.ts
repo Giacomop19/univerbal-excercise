@@ -5,7 +5,7 @@ import { findTvSeriesMatchingQuery } from '@/infrastructure/repositories/tv-seri
 export const inputValue$ = atom<string | undefined>();
 export const inputContentType$ = atom<boolean | undefined>()
 
-type Suggestion = { title: string; id: string };
+type Suggestion = { title: string; id: string, seasons ?:any };
 
 export const suggestions$ = atom(async (get, { signal }) => {
   const title = get(inputValue$);

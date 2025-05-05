@@ -24,11 +24,11 @@ export function Search({ style }: SearchProps): ReactNode {
   const suggestions = useAtomValue(loadable(suggestions$));
   const filteredSuggestions = suggestions.state === 'hasData'
     ? suggestions.data.filter((it) => {
-      const query = inputValue.toLowerCase();
-      const titleMatches = it.title.toLowerCase().includes(query);
+      const query = inputValue?.toLowerCase();
+      const titleMatches = it.title.toLowerCase().includes(query as string);
 
       // Determine type: if it has 'seasons', it's a TV series
-      const isTv = it.seasons !== undefined;
+      const isTv = it?.seasons !== undefined;
       const isMovie = !isTv;
 
       if (selectedType === 'movie' && !isMovie) return false;
