@@ -1,32 +1,34 @@
 import { Poster } from '@/ui/poster';
 import { ScrollView, StyleSheet, Text, View, ActivityIndicator, Pressable } from 'react-native';
-import { file$, movies$ } from './state';
+import { file$, featuredTvSeries$ } from './state';
 import { useAtom, useAtomValue } from 'jotai';
 import { loadable } from 'jotai/utils';
 import { Rating } from '@/ui/rating';
+import { fileReader } from '@/utils';
+import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { favoritesMovie$ } from 'domain/utils';
+import { favoritesTvSerie$ } from 'domain/utils';
 
 type Props = {
   style?: any;
 };
 
-export function FeaturedMovies({ style }: Props): JSX.Element | null {
-  const stateLoadable = useAtomValue(loadable(movies$));
+export function FeaturedTvSeries({ style }: Props): JSX.Element | null {
+  const stateLoadable = useAtomValue(loadable(featuredTvSeries$));
   const navigation = useNavigation()
 
   const posterFile = useAtomValue(loadable(file$))
   let blob : string = ''
   if(posterFile.state == 'hasData') blob = posterFile.data.url
   
-  const [favorites, setFavorites] = useAtom(favoritesMovie$);
-
-  const toggleFavorite = async (movie: any) => {
-    const isFav = favorites?.some((item) => item.id === movie.id)
+  const [favorites, setFavorites] = useAtom(favoritesTvSerie$);
+  
+  const toggleFavorite = async (tvSerie: any) => {
+    const isFav = favorites?.some((item) => item.id === tvSerie.id)
     if (isFav) {
-      await setFavorites((prev) => prev.filter((item) => item.id !== movie.id));
+      await setFavorites((prev) => prev.filter((item) => item.id !== tvSerie.id));
     } else {
-      await setFavorites((prev) => [...prev, movie]);
+      await setFavorites((prev) => [...prev, tvSerie]);
     }
   };
 
@@ -43,14 +45,14 @@ export function FeaturedMovies({ style }: Props): JSX.Element | null {
     case 'hasData': {
       return (
         <View style={[styles.root, style]}>
-          <Text style={styles.title}>Featured Movies</Text>
+          <Text style={styles.title}>Featured Tv Series</Text>
           <ScrollView horizontal style={styles.list}>
             {stateLoadable.data.map((it, index) => (
               <Pressable 
                 key={it.id ?? index}
-                onPress={() => navigation.navigate('movie-screen', {data : it, poster: blob})}
+                onPress={() => navigation.navigate('tv-series-screen', {data : it, poster: blob})}
               >
-              <View style={styles.card}>
+              <View  style={styles.card}>
                 <View style={styles.overlay}>
                   <Text style={styles.text}>{it.title}</Text>
                   <Rating style={styles.text} value={it.rating} />

@@ -4,13 +4,14 @@ import { findTvSeriesMatchingQuery } from '@/infrastructure/repositories/tv-seri
 
 export const inputValue$ = atom<string | undefined>();
 
-type Suggestion = { title: string; id: string };
+type Suggestion = { title: string; id: string, seasons ?:any };
 
 export const suggestions$ = atom(async (get, { signal }) => {
   const title = get(inputValue$);
   if (!title) return [];
+  
 
-  const movies = await findMoviesMatchingQuery(signal, { title });
+  const movies = await findMoviesMatchingQuery(signal, { title});
   const tvSeries = await findTvSeriesMatchingQuery({ title });
 
   const result: Suggestion[] = [];

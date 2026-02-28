@@ -33,22 +33,20 @@ export default function TopRatedScreen(): ReactNode {
   if (topRatedMoviesLoadable.state === 'hasData') {
     return (
       //FlatList was causing an error when inside a ScrollView, tipically happens when nested
-      <> 
-      <SafeAreaView style={styles.container}>
-          {/* movies */}
-          <ScrollView  style={styles.contentContainer}>
+      <>
+        <ScrollView style={styles.contentContainer}>
+            {/* movies */}
             <View style={styles.section}>
               <Text style={styles.title}>Top rated movies</Text>
-              <List data={topRatedMoviesLoadable.data}  />
+              <List data={topRatedMoviesLoadable.data} />
             </View>
 
-          {/* tv series */}
-          <View style={styles.section}>
-            <Text style={styles.title}>Top rated tv series</Text>
-            <List data={tvSeres} />
-          </View>
-          </ScrollView>
-      </SafeAreaView>
+            {/* tv series */}
+            <View style={styles.section}>
+              <Text style={styles.title}>Top rated tv series</Text>
+              <List data={tvSeres} />
+            </View>
+        </ScrollView>
       </>
     );
   }
@@ -64,7 +62,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#d3d3d3',
-    alignItems : 'center',
+    padding: 15
   },
   contentContainer: {
     padding : 15

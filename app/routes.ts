@@ -1,5 +1,3 @@
-import TvSeriesDetailedScreen from "./screens/content-detailed";
-
 export const appRouteNames = {
   root: 'tab-home',
   topRated: 'tab-top-rated',
